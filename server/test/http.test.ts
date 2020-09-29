@@ -1,5 +1,4 @@
 import request from "supertest"
-import { Response } from "express"
 
 process.env.NODE_ENV = "test"
 
@@ -7,14 +6,17 @@ describe("http tests", () => {
     let server: any
 
     beforeEach(() => {
-        delete require.cache[require.resolve("../server/server.ts")]
-        server = require("../server/server.ts")
+        delete require.cache[require.resolve("../server.ts")]
+        server = require("../server.ts")
     })
 
     afterEach(async () => {
         await server.close()
     })
 
+    /**
+     * /countries
+     */
     it("gets all countries on GET /countries", async function () {
         return request(server)
             .get("/countries")
@@ -81,6 +83,35 @@ describe("http tests", () => {
             })
             .expect(200)
     })
+
+    /**
+     * /reverse
+     */
+
+    it("get the reversed and uppercased word on GET /reverse/:str", async function () {
+        return request(server)
+            .get("/reverse/hithere")
+            .set("Accept", "application/json")
+            .expect("Content-Type", "application/json; charset=utf-8")
+            .expect(({ body }) => { if (!body.success) throw new Error('success is false') })
+            .expect(({ body }) => { if (body.data !== "ErEhtIh") throw new Error('the reversed word expected does not match') })
+            .expect(200)
+    })
+
+    /**
+     * /append
+     */
+
+    // it("get the array with start on GET /reverse/:str", async function () {
+    //     return request(server)
+    //         .get("/append")
+    //         .query({ start: "hello" })
+    //         .set("Accept", "application/json")
+    //         .expect("Content-Type", "application/json; charset=utf-8")
+    //         .expect(({ body }) => { if (!body.success) throw new Error('success is false') })
+    //         .expect(({ body }) => { if (body.data !== "ErEhtIh") throw new Error('the reversed word expected does not match') })
+    //         .expect(200)
+    // })
 
 })
 

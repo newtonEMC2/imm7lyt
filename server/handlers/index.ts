@@ -1,6 +1,9 @@
 import { Request, Response } from 'express'
 import fetch from 'isomorphic-unfetch'
 
+import config from '../config'
+
+
 const HandlerFactory = () => {
 
     /**
@@ -54,10 +57,14 @@ const HandlerFactory = () => {
     const headTail = (req: Request, res: Response): Response => {
         try {
             const { start, end } = req.query
-            const simpleArr = process.env.SIMPLE_ARRAY
-            console.log(simpleArr)
-            // if (start) simpleArr.unshift(start)
-            // if (end) simpleArr.push(end)
+            let simpleArr: any = process.env.SIMPLE_ARRAY
+            simpleArr = simpleArr.split('')
+            simpleArr.shift()
+            simpleArr.pop()
+
+            if (start) simpleArr.unshift(start)
+            if (end) simpleArr.push(end)
+
             return res.status(200).json({ success: true, data: simpleArr })
         } catch (e) {
             return _errorHandler(res, e.message)

@@ -12,4 +12,4 @@ const validationManager = (req: Request, res: Response, next: NextFunction) => {
     next()
 }
 
-module.exports = validationManager
+export default validationManager
