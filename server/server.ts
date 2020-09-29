@@ -19,4 +19,4 @@ server.use("/", routes)
 
 const serverObj = server.listen(PORT, () => { console.log("Server listening in PORT ", PORT) })
 
-export default serverObj
+module.exports = serverObj

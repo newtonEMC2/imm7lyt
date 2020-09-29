@@ -10,8 +10,18 @@ const HandlerFactory = () => {
      */
     const getAllCountries = async (req: Request, res: Response): Promise<Response> => {
         try {
-            let rp = await fetch('https://api.jsonbin.io/b/5f69afbe65b18913fc510ce8')
+            const { filter, order } = req.query
+            let rp: any = await fetch('https://api.jsonbin.io/b/5f69afbe65b18913fc510ce8')
             rp = await rp.json()
+
+            if (filter) {
+                rp = rp.filter((el: any) => {
+                    if (el.country.includes(filter) || el.code.includes(filter)) return el
+                })
+            }
+            if (order) {
+                rp.sort((a: any, b: any) => order === "asc" ? a.vat - b.vat : b.vat - a.vat);
+            }
 
             return res.status(200).json({ success: true, data: rp })
 
