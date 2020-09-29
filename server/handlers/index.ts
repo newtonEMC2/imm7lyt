@@ -26,11 +26,33 @@ const HandlerFactory = () => {
      * @param res 
      */
     const reverseString = (req: Request, res: Response): Response => {
-        let { str } = req.params
+        try {
+            let { str } = req.params
+            str = _reverse(str);
+            return res.status(200).json({ success: true, data: str })
+        } catch (e) {
+            return _errorHandler(res, e.message)
+        }
 
-        str = _reverse(str);
+    }
 
-        return res.status(200).json({ success: true, data: str })
+    /**
+     * 
+     * @param req 
+     * @param res 
+     */
+    const headTail = (req: Request, res: Response): Response => {
+        try {
+            const { start, end } = req.query
+            const simpleArr = process.env.SIMPLE_ARRAY
+            console.log(simpleArr)
+            // if (start) simpleArr.unshift(start)
+            // if (end) simpleArr.push(end)
+            return res.status(200).json({ success: true, data: simpleArr })
+        } catch (e) {
+            return _errorHandler(res, e.message)
+
+        }
     }
 
     /**
@@ -38,11 +60,8 @@ const HandlerFactory = () => {
      * @param str 
      */
     const _reverse = (str: string): string => {
-        if (str === "")
-            return ""
-        else
-            return _reverse(str.substr(1)) + str.charAt(0);
-
+        let reversed: (string[] | string) = [...str].reverse()
+        return reversed.reduce((a: string, c: string) => a + (/[aeiou]/i.test(c) ? c.toUpperCase() : c), "")
     }
 
     /**
@@ -57,7 +76,7 @@ const HandlerFactory = () => {
 
 
     return {
-        getAllCountries, reverseString
+        getAllCountries, reverseString, headTail
     }
 }
 
