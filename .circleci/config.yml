@@ -8,4 +8,4 @@ jobs:
       - run:
           name: Running tests
           command: |
-            docker exec -it banks npm test
+            docker exec -it alexis-restapi npm test
