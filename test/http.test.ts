@@ -6,8 +6,8 @@ describe("http tests", () => {
     let server: any
 
     beforeEach(() => {
-        delete require.cache[require.resolve("../server.ts")]
-        server = require("../server.ts")
+        delete require.cache[require.resolve("../server/server.ts")]
+        server = require("../server/server.ts")
     })
 
     afterEach(async () => {
