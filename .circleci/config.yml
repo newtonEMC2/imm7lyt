@@ -1,7 +1,16 @@
 version: 2.1
-orbs:
-  node: circleci/node@3.0.0
-workflows:
-  node-tests:
-    jobs:
-      - node/test
+jobs:
+    run_tests:
+        docker:
+        - image: circleci/node:10
+        - steps:
+            - checkout #gitclone
+            - run: 
+                name: npm i dependenies
+                command: |
+                    npm i 
+            - run: 
+                name: pass tests
+                command: |
+                    docker exec -it alexis-restapi npm test
+                       
