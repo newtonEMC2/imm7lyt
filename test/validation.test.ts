@@ -14,6 +14,9 @@ describe("http tests", () => {
         await server.close()
     })
 
+    /**
+     * countries
+     */
     it("fails on empty param on GET /countries", async function () {
         return request(server)
             .get("/countries")
@@ -36,6 +39,27 @@ describe("http tests", () => {
         return request(server)
             .get("/countries")
             .query({ order: "des" })
+            .set("Accept", "application/json")
+            .expect("Content-Type", "application/json; charset=utf-8")
+            .expect(422)
+    })
+
+    /**
+     * append
+     */
+    it("fails on bad start param on GET /append", async function () {
+        return request(server)
+            .get("/append")
+            .query({ start: null })
+            .set("Accept", "application/json")
+            .expect("Content-Type", "application/json; charset=utf-8")
+            .expect(422)
+    })
+
+    it("fails on bad end param on GET /append", async function () {
+        return request(server)
+            .get("/append")
+            .query({ start: "" })
             .set("Accept", "application/json")
             .expect("Content-Type", "application/json; charset=utf-8")
             .expect(422)

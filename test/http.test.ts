@@ -102,16 +102,30 @@ describe("http tests", () => {
      * /append
      */
 
-    // it("get the array with start on GET /reverse/:str", async function () {
-    //     return request(server)
-    //         .get("/append")
-    //         .query({ start: "hello" })
-    //         .set("Accept", "application/json")
-    //         .expect("Content-Type", "application/json; charset=utf-8")
-    //         .expect(({ body }) => { if (!body.success) throw new Error('success is false') })
-    //         .expect(({ body }) => { if (body.data !== "ErEhtIh") throw new Error('the reversed word expected does not match') })
-    //         .expect(200)
-    // })
+    it("get the array with start and end on GET /append", async function () {
+        return request(server)
+            .get("/append")
+            .query({ start: "hello", end: "bye" })
+            .set("Accept", "application/json")
+            .expect("Content-Type", "application/json; charset=utf-8")
+            .expect(({ body }) => { if (!body.success) throw new Error('success is false') })
+            .expect(({ body }) => { if (body.data.length !== 3) throw new Error('array should be 3 items') })
+            .expect(({ body }) => { if (body.data[0] !== "hello") throw new Error('1st item should be hello') })
+            .expect(({ body }) => { if (body.data[2] !== "bye") throw new Error('last item should be bye') })
+            .expect(200)
+    })
+
+    it("get the array with start and end on GET /append", async function () {
+        return request(server)
+            .get("/append")
+            .query({ start: "hello" })
+            .set("Accept", "application/json")
+            .expect("Content-Type", "application/json; charset=utf-8")
+            .expect(({ body }) => { if (!body.success) throw new Error('success is false') })
+            .expect(({ body }) => { if (body.data.length !== 2) throw new Error('array should be 3 items') })
+            .expect(({ body }) => { if (body.data[0] !== "hello") throw new Error('1st item should be hello') })
+            .expect(200)
+    })
 
 })
 

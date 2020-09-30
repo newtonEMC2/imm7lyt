@@ -57,10 +57,11 @@ const HandlerFactory = () => {
     const headTail = (req: Request, res: Response): Response => {
         try {
             const { start, end } = req.query
-            let simpleArr: any = process.env.SIMPLE_ARRAY
+            let simpleArr: any = config.SIMPLE_ARRAY
             simpleArr = simpleArr.split('')
             simpleArr.shift()
             simpleArr.pop()
+            simpleArr = [simpleArr.join('')]
 
             if (start) simpleArr.unshift(start)
             if (end) simpleArr.push(end)
