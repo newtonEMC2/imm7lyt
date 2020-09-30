@@ -1,0 +1,18 @@
+version: "2.4"
+services:
+    alexis-restapi:
+        container_name: alexis-restapi
+        build: .
+        env_file:
+        - .env
+        ports: 
+            - "8300:8300"
+            - "8301:8301"
+        volumes:
+        - .:/usr/app
+        - /usr/app/node_modules/
+  
+  
+  
+    
+    

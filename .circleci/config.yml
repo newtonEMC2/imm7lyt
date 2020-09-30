@@ -6,6 +6,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Start containers and verify they're working
+          command: |
+            set -x
+            docker-compose -f docker-compose-circleci.yml config
+            docker-compose -f docker-compose-circleci.yml up -d
+      - run:
           name: Running tests
           command: |
             docker exec -it alexis-restapi npm test
