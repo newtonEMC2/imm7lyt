@@ -6,6 +6,12 @@ jobs:
     steps:
       - checkout
       - run:
+          name: Create env file
+          command: |
+          echo $ENV | base64 -d >> .env
+          
+          source .env
+      - run:
           name: Start containers and verify they're working
           command: |
             set -x
