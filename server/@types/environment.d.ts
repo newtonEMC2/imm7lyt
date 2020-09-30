@@ -4,6 +4,7 @@ declare global {
             NODE_ENV: string;
             PORT: string;
             SIMPLE_ARRAY: string;
+            PORT_TEST: string
         }
     }
 }

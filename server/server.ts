@@ -7,6 +7,7 @@ import routes from './routes'
 
 let PORT = parseInt((config.PORT || "3000"), 10)
 let NODE_ENV = config.NODE_ENV
+if (NODE_ENV === "test") PORT = parseInt((config.PORT_TEST || "3001"), 10)
 
 const server = express()
 server.use(express.json())

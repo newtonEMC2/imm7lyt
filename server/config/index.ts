@@ -4,9 +4,10 @@ if (process.env.NODE_ENV !== "production") {
 
 const {
     PORT,
-    NODE_ENV,
+    PORT_TEST,
+    NODE_ENV = "development",
     SIMPLE_ARRAY = "[MY_ARRAY]"
 } = process.env
 
-export default { PORT, NODE_ENV, SIMPLE_ARRAY }
+export default { PORT, NODE_ENV, SIMPLE_ARRAY, PORT_TEST }
 
