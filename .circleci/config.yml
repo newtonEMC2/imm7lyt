@@ -1,16 +1,11 @@
 version: 2.1
 jobs:
-    run_tests:
-        docker:
-        - image: circleci/node:10
-        - steps:
-            - checkout #gitclone
-            - run: 
-                name: npm i dependenies
-                command: |
-                    npm i 
-            - run: 
-                name: pass tests
-                command: |
-                    docker exec -it alexis-restapi npm test
-                       
+  build:
+    docker:
+      - image: circleci/node:10
+    steps:
+      - checkout
+      - run:
+          name: Running tests
+          command: |
+            docker exec -it banks npm test
