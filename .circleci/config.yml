@@ -10,11 +10,11 @@ jobs:
           command: |
             npm i
       - run:
-        name: run tests
-        command: |
-          npm run test
+          name: run tests
+          command: |
+            npm run test
 workflows:
   build_tests:
     jobs:
-      run_tests
+      - run_tests
       
