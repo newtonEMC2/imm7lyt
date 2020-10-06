@@ -8,7 +8,9 @@
     "test": "mocha -r ts-node/register test/**/*.test.ts -t 10000 --exit",
     "dev": "nodemon --exec ts-node ./server/server.ts",
     "build": "npm run clean && tsc",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "lint": "eslint server/**/*.ts",
+    "lint:fix": "eslint server/**/*.ts --fix"
   },
   "keywords": [],
   "author": "",

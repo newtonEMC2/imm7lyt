@@ -15,5 +15,8 @@ module.exports = {
     '@typescript-eslint'
   ],
   rules: {
+    semi: 'error',
+    quotes: ['error', 'single'],
+    'no-unused-expressions': [2, { allowTernary: true, allowShortCircuit: true }]
   }
 }
