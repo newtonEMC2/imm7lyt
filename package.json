@@ -10,7 +10,8 @@
     "build": "npm run clean && tsc",
     "clean": "rm -rf dist",
     "lint": "eslint server/**/*.ts",
-    "lint:fix": "eslint server/**/*.ts --fix"
+    "lint:fix": "eslint server/**/*.ts --fix",
+    "remote-deploy": "bash deploy.sh testNode"
   },
   "keywords": [],
   "author": "",
